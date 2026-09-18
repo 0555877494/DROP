@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react';
 import { products, categories } from '../data/products';
 import { Product } from '../data/products';
+import CountdownSection from './CountdownSection';
+import ForYouSection from './ForYouSection';
 
 interface HomeScreenProps {
   onProductSelect: (product: Product) => void;
@@ -104,6 +106,16 @@ export default function HomeScreen({ onProductSelect, wishlist, onToggleWishlist
           </div>
         </div>
       </div>
+
+      {/* Countdown Drops */}
+      <CountdownSection />
+
+      {/* AI For You */}
+      <ForYouSection
+        onProductSelect={onProductSelect}
+        wishlist={wishlist}
+        onToggleWishlist={onToggleWishlist}
+      />
 
       {/* Hot Right Now */}
       <div className="mb-5">

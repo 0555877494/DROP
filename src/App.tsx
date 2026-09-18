@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import HomeScreen from './components/HomeScreen';
 import ExploreScreen from './components/ExploreScreen';
 import CartScreen from './components/CartScreen';
+import RewardsScreen from './components/RewardsScreen';
 import ProfileScreen from './components/ProfileScreen';
 import ProductDetail from './components/ProductDetail';
 import BottomNav from './components/BottomNav';
 import { Product } from './data/products';
 
-type TabType = 'home' | 'explore' | 'cart' | 'profile';
+type TabType = 'home' | 'explore' | 'cart' | 'rewards' | 'profile';
 
 export interface CartItem {
   product: Product;
@@ -80,6 +81,8 @@ function App() {
             onRemove={removeFromCart}
           />
         );
+      case 'rewards':
+        return <RewardsScreen />;
       case 'profile':
         return <ProfileScreen wishlistCount={wishlist.length} />;
       default:
@@ -97,7 +100,6 @@ function App() {
         </div>
       </main>
 
-      {/* Product Detail Modal */}
       {selectedProduct && (
         <ProductDetail
           product={selectedProduct}

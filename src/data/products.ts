@@ -32,6 +32,7 @@ export const products: Product[] = [
     lastSale: 290,
     change: 5.2,
     isHot: true,
+    isNew: false,
     seller: 'KicksVault',
     sellerRating: 4.9,
   },

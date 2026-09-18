@@ -12,6 +12,9 @@ interface ProductDetailProps {
 export default function ProductDetail({ product, onClose, onAddToCart, isWishlisted, onToggleWishlist }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'details' | 'sales'>('details');
+  const [priceAlertSet, setPriceAlertSet] = useState(false);
+  const [targetPrice, setTargetPrice] = useState('');
+  const [showPriceAlert, setShowPriceAlert] = useState(false);
 
   const handleAddToCart = () => {
     if (selectedSize) {
@@ -96,6 +99,41 @@ export default function ProductDetail({ product, onClose, onAddToCart, isWishlis
                 {Math.abs(product.change)}% this week
               </div>
             )}
+
+            {/* Price Alert */}
+            <div className="mt-3">
+              {!showPriceAlert ? (
+                <button
+                  onClick={() => setShowPriceAlert(true)}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium active:scale-95 transition-transform w-full justify-center"
+                >
+                  <i className={`fa-${priceAlertSet ? 'solid' : 'regular'} fa-bell`} />
+                  {priceAlertSet ? 'Price Alert Set ✓' : 'Set Price Alert'}
+                </button>
+              ) : (
+                <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 animate-scale-in">
+                  <p className="text-xs text-blue-300 mb-2">Get notified when price drops to:</p>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                      <input
+                        type="number"
+                        value={targetPrice}
+                        onChange={(e) => setTargetPrice(e.target.value)}
+                        placeholder={String(Math.round(product.price * 0.85))}
+                        className="w-full bg-black/30 border border-white/10 rounded-lg py-2 pl-7 pr-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+                      />
+                    </div>
+                    <button
+                      onClick={() => { setPriceAlertSet(true); setShowPriceAlert(false); }}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-bold active:scale-95 transition-transform"
+                    >
+                      Set
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Tabs */}
             <div className="flex gap-4 mt-5 border-b border-white/5">
