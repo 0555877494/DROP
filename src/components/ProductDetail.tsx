@@ -47,8 +47,12 @@ export default function ProductDetail({ product, onClose, onAddToCart, isWishlis
 
         <div className="overflow-y-auto no-scrollbar flex-1">
           {/* Product Image */}
-          <div className="h-52 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-950 relative">
-            <span className="text-7xl animate-float">{product.image}</span>
+          <div className="h-52 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-950 relative overflow-hidden">
+            <img 
+              src={product.image} 
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
             {product.isHot && (
               <div className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
                 🔥 HOT

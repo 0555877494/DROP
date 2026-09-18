@@ -128,8 +128,12 @@ export default function ExploreScreen({ onProductSelect, wishlist, onToggleWishl
               className="rounded-2xl bg-gray-900/80 border border-white/5 overflow-hidden active:scale-[0.97] transition-transform animate-scale-in text-left"
               style={{ animationDelay: `${i * 50}ms` }}
             >
-              <div className="h-32 flex items-center justify-center bg-gradient-to-br from-gray-800/30 to-gray-900/30 relative">
-                <span className="text-4xl">{product.image}</span>
+              <div className="h-32 flex items-center justify-center bg-gradient-to-br from-gray-800/30 to-gray-900/30 relative overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                />
                 <button
                   onClick={(e) => { e.stopPropagation(); onToggleWishlist(product.id); }}
                   className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/40 flex items-center justify-center"
@@ -143,7 +147,7 @@ export default function ExploreScreen({ onProductSelect, wishlist, onToggleWishl
                     🔥 HOT
                   </div>
                 )}
-                {product.isNew && (
+                {product.isNew && !product.isHot && (
                   <div className="absolute top-2 left-2 bg-green-500/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md">
                     NEW
                   </div>

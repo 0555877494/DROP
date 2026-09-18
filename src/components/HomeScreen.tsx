@@ -77,31 +77,41 @@ export default function HomeScreen({ onProductSelect, wishlist, onToggleWishlist
 
       {/* Featured Drop */}
       <div className="px-5 mb-5">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-violet-900/50 via-purple-900/30 to-pink-900/30 border border-white/5 p-5">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-violet-900/50 via-purple-900/30 to-pink-900/30 border border-white/5">
           <div className="absolute top-0 right-0 w-40 h-40 bg-violet-500/10 rounded-full -translate-y-12 translate-x-12 blur-2xl" />
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-pink-500/10 rounded-full translate-y-12 -translate-x-12 blur-2xl" />
-          <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">LIVE</span>
-              <span className="text-xs text-gray-400">Featured Drop</span>
+          <div className="flex">
+            <div className="relative z-10 flex-1 p-5 flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">LIVE</span>
+                <span className="text-xs text-gray-400">Featured Drop</span>
+              </div>
+              <h2 className="text-xl font-bold mb-1">Travis Scott x Jordan 1 Low</h2>
+              <p className="text-sm text-gray-400 mb-3">Reverse Mocha • Last Sale: $880</p>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => onProductSelect(products[7])}
+                  className="bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold active:scale-95 transition-transform"
+                >
+                  Buy Now — $890
+                </button>
+                <button
+                  onClick={() => onToggleWishlist(8)}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all ${
+                    wishlist.includes(8) ? 'bg-pink-500/20 border-pink-500/30' : 'border-white/10'
+                  }`}
+                >
+                  <i className={`fa-${wishlist.includes(8) ? 'solid' : 'regular'} fa-heart ${wishlist.includes(8) ? 'text-pink-400' : 'text-gray-400'}`} />
+                </button>
+              </div>
             </div>
-            <h2 className="text-xl font-bold mb-1">Travis Scott x Jordan 1 Low</h2>
-            <p className="text-sm text-gray-400 mb-3">Reverse Mocha • Last Sale: $880</p>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => onProductSelect(products[7])}
-                className="bg-white text-black px-5 py-2.5 rounded-full text-sm font-bold active:scale-95 transition-transform"
-              >
-                Buy Now — $890
-              </button>
-              <button
-                onClick={() => onToggleWishlist(8)}
-                className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all ${
-                  wishlist.includes(8) ? 'bg-pink-500/20 border-pink-500/30' : 'border-white/10'
-                }`}
-              >
-                <i className={`fa-${wishlist.includes(8) ? 'solid' : 'regular'} fa-heart ${wishlist.includes(8) ? 'text-pink-400' : 'text-gray-400'}`} />
-              </button>
+            <div className="w-32 h-40 relative overflow-hidden">
+              <img 
+                src={products[7].image}
+                alt="Travis Scott x Jordan 1 Low"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-transparent" />
             </div>
           </div>
         </div>
@@ -137,10 +147,12 @@ export default function HomeScreen({ onProductSelect, wishlist, onToggleWishlist
               style={{ animationDelay: `${i * 80}ms` }}
             >
               <div className="relative rounded-2xl bg-gray-900/80 border border-white/5 overflow-hidden">
-                <div className="h-36 flex items-center justify-center bg-gradient-to-br from-gray-800/50 to-gray-900/50">
-                  <span className="text-5xl animate-float" style={{ animationDelay: `${i * 200}ms` }}>
-                    {product.image}
-                  </span>
+                <div className="h-36 flex items-center justify-center bg-gradient-to-br from-gray-800/50 to-gray-900/50 overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="p-3">
                   <p className="text-[10px] text-gray-500 uppercase tracking-wider">{product.brand}</p>
@@ -181,8 +193,12 @@ export default function HomeScreen({ onProductSelect, wishlist, onToggleWishlist
                 className="flex items-center gap-3 p-3 rounded-2xl glass w-full text-left active:scale-[0.98] transition-transform animate-slide-right"
                 style={{ animationDelay: `${i * 100}ms` }}
               >
-                <div className="w-14 h-14 rounded-xl bg-gray-800/50 flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl">{product.image}</span>
+                <div className="w-14 h-14 rounded-xl bg-gray-800/50 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover rounded-xl"
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-gray-500">{product.brand}</p>
@@ -212,8 +228,12 @@ export default function HomeScreen({ onProductSelect, wishlist, onToggleWishlist
               className="rounded-2xl bg-gray-900/80 border border-white/5 overflow-hidden active:scale-[0.97] transition-transform animate-scale-in"
               style={{ animationDelay: `${i * 60}ms` }}
             >
-              <div className="h-28 flex items-center justify-center bg-gradient-to-br from-gray-800/30 to-gray-900/30 relative">
-                <span className="text-4xl">{product.image}</span>
+              <div className="h-28 flex items-center justify-center bg-gradient-to-br from-gray-800/30 to-gray-900/30 relative overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                />
                 <button
                   onClick={(e) => { e.stopPropagation(); onToggleWishlist(product.id); }}
                   className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/40 flex items-center justify-center"

@@ -14,7 +14,13 @@ export default function CartScreen({ cart, onRemove }: CartScreenProps) {
   if (cart.length === 0) {
     return (
       <div className="h-full flex flex-col items-center justify-center px-5">
-        <div className="text-6xl mb-4 animate-float">🛍️</div>
+        <div className="w-24 h-24 mb-4 rounded-full bg-gray-900/80 flex items-center justify-center overflow-hidden animate-float">
+          <img 
+            src="https://image.qwenlm.ai/generated-images/05e2035b-703e-4a72-ab95-bb816dd22b4a/_result.png"
+            alt="Empty cart"
+            className="w-16 h-16 object-cover opacity-50"
+          />
+        </div>
         <h2 className="text-xl font-bold text-white mb-2">Your bag is empty</h2>
         <p className="text-sm text-gray-400 text-center mb-6">
           Start adding some heat to your collection
@@ -50,8 +56,12 @@ export default function CartScreen({ cart, onRemove }: CartScreenProps) {
             className="flex gap-3 p-3 rounded-2xl glass animate-slide-up"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <div className="w-20 h-20 rounded-xl bg-gray-800/50 flex items-center justify-center flex-shrink-0">
-              <span className="text-3xl">{item.product.image}</span>
+            <div className="w-20 h-20 rounded-xl bg-gray-800/50 flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <img 
+                src={item.product.image} 
+                alt={item.product.name}
+                className="w-full h-full object-cover rounded-xl"
+              />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between">

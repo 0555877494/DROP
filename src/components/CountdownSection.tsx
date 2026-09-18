@@ -15,7 +15,7 @@ const upcomingDrops: DropItem[] = [
     id: 1,
     name: 'Air Jordan 4 Retro',
     brand: 'Jordan',
-    image: '🔵',
+    image: 'https://image.qwenlm.ai/generated-images/5ed618f2-16e0-497d-b52c-295c1b46604f/_result.png',
     retailPrice: 210,
     dropTime: Date.now() + 2 * 60 * 60 * 1000 + 34 * 60 * 1000,
     interested: 12453,
@@ -24,7 +24,7 @@ const upcomingDrops: DropItem[] = [
     id: 2,
     name: 'Nike SB Dunk Low',
     brand: 'Nike',
-    image: '🟣',
+    image: 'https://image.qwenlm.ai/generated-images/05e2035b-703e-4a72-ab95-bb816dd22b4a/_result.png',
     retailPrice: 125,
     dropTime: Date.now() + 8 * 60 * 60 * 1000 + 15 * 60 * 1000,
     interested: 8921,
@@ -33,7 +33,7 @@ const upcomingDrops: DropItem[] = [
     id: 3,
     name: 'Yeezy Slide',
     brand: 'adidas',
-    image: '🟤',
+    image: 'https://image.qwenlm.ai/generated-images/957f1d67-a6e0-4466-b056-2e8a50790544/_result.png',
     retailPrice: 70,
     dropTime: Date.now() + 26 * 60 * 60 * 1000,
     interested: 15672,
@@ -104,10 +104,12 @@ export default function CountdownSection() {
             style={{ animationDelay: `${i * 100}ms` }}
           >
             {/* Gradient Background */}
-            <div className="relative h-28 bg-gradient-to-br from-violet-900/40 via-purple-900/30 to-indigo-900/40 flex items-center justify-center">
-              <span className="text-5xl animate-float" style={{ animationDelay: `${i * 300}ms` }}>
-                {drop.image}
-              </span>
+            <div className="relative h-28 bg-gradient-to-br from-violet-900/40 via-purple-900/30 to-indigo-900/40 flex items-center justify-center overflow-hidden">
+              <img 
+                src={drop.image} 
+                alt={drop.name}
+                className="w-full h-full object-cover"
+              />
               <div className="absolute top-2 left-2">
                 <span className="bg-red-500/90 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
                   UPCOMING

@@ -39,8 +39,12 @@ export default function ForYouSection({ onProductSelect, wishlist, onToggleWishl
       {/* Swipe Card */}
       <div className="relative h-56 rounded-3xl overflow-hidden border border-white/5 animate-scale-in">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 to-gray-900/80" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-7xl animate-float">{currentProduct.image}</span>
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+          <img 
+            src={currentProduct.image} 
+            alt={currentProduct.name}
+            className="w-full h-full object-cover"
+          />
         </div>
         
         {/* Overlay Info */}
