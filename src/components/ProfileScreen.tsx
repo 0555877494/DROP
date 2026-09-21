@@ -1,9 +1,5 @@
 interface ProfileScreenProps {
   wishlistCount: number;
-}
-
-interface ProfileScreenProps {
-  wishlistCount: number;
   onNavigate?: (screen: string) => void;
 }
 

@@ -30,12 +30,16 @@ export default function HomeScreen({ onProductSelect, wishlist, onToggleWishlist
           </h1>
           <p className="text-[11px] text-gray-500 -mt-0.5">Sneakers & Streetwear</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <button className="w-9 h-9 rounded-full glass flex items-center justify-center active:scale-95 transition-transform">
             <i className="fa-solid fa-magnifying-glass text-sm text-gray-300" />
           </button>
           <button className="w-9 h-9 rounded-full glass flex items-center justify-center active:scale-95 transition-transform">
             <i className="fa-solid fa-bell text-sm text-gray-300" />
+          </button>
+          <button className="h-9 px-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center gap-1.5 active:scale-95 transition-transform">
+            <i className="fa-solid fa-tag text-xs text-white" />
+            <span className="text-xs font-bold text-white">Sell</span>
           </button>
         </div>
       </div>

@@ -22,10 +22,12 @@ import AuthenticationCenter from './components/AuthenticationCenter';
 import HelpCenter from './components/HelpCenter';
 import SupportChat from './components/SupportChat';
 import PersonalAnalytics from './components/PersonalAnalytics';
+import SellScreen from './components/SellScreen';
+import Onboarding from './components/Onboarding';
 import { Product } from './data/products';
 
 type TabType = 'home' | 'explore' | 'cart' | 'rewards' | 'profile';
-type ModalType = 'notifications' | 'orders' | 'wishlist' | 'calendar' | 'trends' | 'style' | 'seller' | 'gifts' | 'alerts' | 'compare' | 'prediction' | 'referrals' | 'auth' | 'help' | 'support' | 'analytics' | null;
+type ModalType = 'notifications' | 'orders' | 'wishlist' | 'calendar' | 'trends' | 'style' | 'seller' | 'gifts' | 'alerts' | 'compare' | 'prediction' | 'referrals' | 'auth' | 'help' | 'support' | 'analytics' | 'sell' | null;
 
 export interface CartItem {
   product: Product;
@@ -40,6 +42,7 @@ function App() {
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeModal, setActiveModal] = useState<ModalType>(null);
+  const [showOnboarding, setShowOnboarding] = useState(true);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -185,6 +188,13 @@ function App() {
       )}
       {activeModal === 'analytics' && (
         <PersonalAnalytics onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'sell' && (
+        <SellScreen onClose={() => setActiveModal(null)} />
+      )}
+
+      {showOnboarding && (
+        <Onboarding onComplete={() => setShowOnboarding(false)} />
       )}
 
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} cartCount={cartCount} />

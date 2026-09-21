@@ -1,5 +1,9 @@
 import { useState } from 'react';
 
+interface OrdersScreenProps {
+  onClose?: () => void;
+}
+
 interface Order {
   id: string;
   productName: string;
