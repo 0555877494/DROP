@@ -62,7 +62,11 @@ const statusSteps = [
   { id: 'delivered', label: 'Delivered', icon: 'fa-check' },
 ];
 
-export default function OrdersScreen() {
+interface OrdersScreenProps {
+  onClose?: () => void;
+}
+
+export default function OrdersScreen({ onClose }: OrdersScreenProps) {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
   const getStatusColor = (status: string) => {

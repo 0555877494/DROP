@@ -2,19 +2,32 @@ interface ProfileScreenProps {
   wishlistCount: number;
 }
 
+interface ProfileScreenProps {
+  wishlistCount: number;
+  onNavigate?: (screen: string) => void;
+}
+
 const menuItems = [
-  { icon: 'fa-bag-shopping', label: 'My Orders', value: '12', color: 'text-violet-400' },
-  { icon: 'fa-dollar-sign', label: 'Selling', value: '3 active', color: 'text-green-400' },
-  { icon: 'fa-heart', label: 'Wishlist', color: 'text-pink-400' },
-  { icon: 'fa-clock-rotate-left', label: 'Recently Viewed', color: 'text-blue-400' },
-  { icon: 'fa-location-dot', label: 'Shipping Addresses', color: 'text-orange-400' },
-  { icon: 'fa-credit-card', label: 'Payment Methods', color: 'text-cyan-400' },
-  { icon: 'fa-bell', label: 'Notifications', badge: '5', color: 'text-yellow-400' },
-  { icon: 'fa-shield-halved', label: 'Privacy & Security', color: 'text-gray-400' },
-  { icon: 'fa-circle-question', label: 'Help & Support', color: 'text-gray-400' },
+  { icon: 'fa-bag-shopping', label: 'My Orders', value: '12', color: 'text-violet-400', screen: 'orders' },
+  { icon: 'fa-dollar-sign', label: 'Seller Dashboard', value: '3 active', color: 'text-green-400', screen: 'seller' },
+  { icon: 'fa-heart', label: 'Wishlist', color: 'text-pink-400', screen: 'wishlist' },
+  { icon: 'fa-calendar', label: 'Release Calendar', color: 'text-blue-400', screen: 'calendar' },
+  { icon: 'fa-chart-line', label: 'Market Trends', color: 'text-cyan-400', screen: 'trends' },
+  { icon: 'fa-shirt', label: 'Style Builder', color: 'text-purple-400', screen: 'style' },
+  { icon: 'fa-bell', label: 'Notifications', badge: '5', color: 'text-yellow-400', screen: 'notifications' },
+  { icon: 'fa-gift', label: 'Gift Cards', color: 'text-amber-400', screen: 'gifts' },
+  { icon: 'fa-ruler', label: 'Size Alerts', color: 'text-indigo-400', screen: 'alerts' },
+  { icon: 'fa-scale-balanced', label: 'Price Compare', color: 'text-teal-400', screen: 'compare' },
+  { icon: 'fa-chart-line', label: 'Price Prediction', color: 'text-emerald-400', screen: 'prediction' },
+  { icon: 'fa-user-group', label: 'Referrals', color: 'text-pink-400', screen: 'referrals' },
+  { icon: 'fa-shield-halved', label: 'Authentication', color: 'text-cyan-400', screen: 'auth' },
+  { icon: 'fa-location-dot', label: 'Shipping Addresses', color: 'text-orange-400', screen: null },
+  { icon: 'fa-credit-card', label: 'Payment Methods', color: 'text-blue-400', screen: null },
+  { icon: 'fa-shield-halved', label: 'Privacy & Security', color: 'text-gray-400', screen: null },
+  { icon: 'fa-circle-question', label: 'Help & Support', color: 'text-gray-400', screen: null },
 ];
 
-export default function ProfileScreen({ wishlistCount }: ProfileScreenProps) {
+export default function ProfileScreen({ wishlistCount, onNavigate }: ProfileScreenProps) {
   return (
     <div className="h-full overflow-y-auto no-scrollbar px-5 pt-4 pb-4">
       {/* Profile Header */}
@@ -75,6 +88,7 @@ export default function ProfileScreen({ wishlistCount }: ProfileScreenProps) {
         {menuItems.map((item, i) => (
           <button
             key={i}
+            onClick={() => item.screen && onNavigate?.(item.screen)}
             className={`flex items-center gap-3 px-4 py-3.5 w-full text-left active:bg-white/5 transition-colors ${
               i < menuItems.length - 1 ? 'border-b border-white/5' : ''
             }`}

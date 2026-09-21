@@ -6,9 +6,10 @@ interface WishlistScreenProps {
   wishlist: number[];
   onToggleWishlist: (id: number) => void;
   onProductSelect: (product: Product) => void;
+  onClose?: () => void;
 }
 
-export default function WishlistScreen({ wishlist, onToggleWishlist, onProductSelect }: WishlistScreenProps) {
+export default function WishlistScreen({ wishlist, onToggleWishlist, onProductSelect, onClose }: WishlistScreenProps) {
   const [sortBy, setSortBy] = useState<'recent' | 'price-low' | 'price-high'>('recent');
 
   const wishlistProducts = products.filter(p => wishlist.includes(p.id));

@@ -74,7 +74,11 @@ const notifications: Notification[] = [
   },
 ];
 
-export default function NotificationsScreen() {
+interface NotificationsScreenProps {
+  onClose?: () => void;
+}
+
+export default function NotificationsScreen({ onClose }: NotificationsScreenProps) {
   const [notifs, setNotifs] = useState(notifications);
   const [filter, setFilter] = useState<'all' | 'unread'>('all');
 

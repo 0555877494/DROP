@@ -6,9 +6,26 @@ import RewardsScreen from './components/RewardsScreen';
 import ProfileScreen from './components/ProfileScreen';
 import ProductDetail from './components/ProductDetail';
 import BottomNav from './components/BottomNav';
+import NotificationsScreen from './components/NotificationsScreen';
+import OrdersScreen from './components/OrdersScreen';
+import WishlistScreen from './components/WishlistScreen';
+import ReleaseCalendar from './components/ReleaseCalendar';
+import MarketTrends from './components/MarketTrends';
+import StyleBuilder from './components/StyleBuilder';
+import SellerDashboard from './components/SellerDashboard';
+import GiftCards from './components/GiftCards';
+import SizeAlerts from './components/SizeAlerts';
+import PriceCompare from './components/PriceCompare';
+import PricePrediction from './components/PricePrediction';
+import ReferralTracking from './components/ReferralTracking';
+import AuthenticationCenter from './components/AuthenticationCenter';
+import HelpCenter from './components/HelpCenter';
+import SupportChat from './components/SupportChat';
+import PersonalAnalytics from './components/PersonalAnalytics';
 import { Product } from './data/products';
 
 type TabType = 'home' | 'explore' | 'cart' | 'rewards' | 'profile';
+type ModalType = 'notifications' | 'orders' | 'wishlist' | 'calendar' | 'trends' | 'style' | 'seller' | 'gifts' | 'alerts' | 'compare' | 'prediction' | 'referrals' | 'auth' | 'help' | 'support' | 'analytics' | null;
 
 export interface CartItem {
   product: Product;
@@ -22,6 +39,7 @@ function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [activeModal, setActiveModal] = useState<ModalType>(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -84,7 +102,12 @@ function App() {
       case 'rewards':
         return <RewardsScreen />;
       case 'profile':
-        return <ProfileScreen wishlistCount={wishlist.length} />;
+        return (
+          <ProfileScreen 
+            wishlistCount={wishlist.length} 
+            onNavigate={(screen) => setActiveModal(screen as ModalType)}
+          />
+        );
       default:
         return null;
     }
@@ -108,6 +131,60 @@ function App() {
           isWishlisted={wishlist.includes(selectedProduct.id)}
           onToggleWishlist={() => toggleWishlist(selectedProduct.id)}
         />
+      )}
+
+      {activeModal === 'notifications' && (
+        <NotificationsScreen onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'orders' && (
+        <OrdersScreen onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'wishlist' && (
+        <WishlistScreen
+          wishlist={wishlist}
+          onToggleWishlist={toggleWishlist}
+          onProductSelect={setSelectedProduct}
+          onClose={() => setActiveModal(null)}
+        />
+      )}
+      {activeModal === 'calendar' && (
+        <ReleaseCalendar onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'trends' && (
+        <MarketTrends onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'style' && (
+        <StyleBuilder onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'seller' && (
+        <SellerDashboard onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'gifts' && (
+        <GiftCards onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'alerts' && (
+        <SizeAlerts onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'compare' && (
+        <PriceCompare onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'prediction' && (
+        <PricePrediction onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'referrals' && (
+        <ReferralTracking onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'auth' && (
+        <AuthenticationCenter onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'help' && (
+        <HelpCenter onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'support' && (
+        <SupportChat onClose={() => setActiveModal(null)} />
+      )}
+      {activeModal === 'analytics' && (
+        <PersonalAnalytics onClose={() => setActiveModal(null)} />
       )}
 
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} cartCount={cartCount} />
